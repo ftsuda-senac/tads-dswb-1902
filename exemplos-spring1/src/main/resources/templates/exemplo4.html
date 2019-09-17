@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spring MVC - Exemplo 4</title>
+</head>
+<body>
+	<h1>Spring MVC - Exemplo 4</h1>
+	<p>Nome: <span th:text="${nomeParam}">Fulano da Silva</span></p>
+	<p th:if="${generoParam == 1}">Genero: Masculino</p>
+	<p th:if="${generoParam == 0}">Genero: Feminino</p>
+	<p>Data de nascimento: <span th:text="${dtNascParam}">10/10/1999</span></p>
+</body>
+</html>
