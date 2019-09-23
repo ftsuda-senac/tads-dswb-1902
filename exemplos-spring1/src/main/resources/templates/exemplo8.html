@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spring MVC - Exemplo 8</title>
+</head>
+<body>
+	<h1>Spring MVC - Exemplo 8</h1>
+    <h2>Cabeçalhos HTTP:</h2>
+    <table>
+        <tr>
+            <th>Cabeçalho</th>
+            <th>Valor</th>
+        </tr>
+        <tr th:each="cab : ${headers}">
+            <td th:text="${cab.key}"></td>
+            <td th:text="${cab.value}"></td>
+        </tr>
+    </table>
+</body>
+</html>

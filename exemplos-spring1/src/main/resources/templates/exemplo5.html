@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spring MVC - Exemplo 5</title>
+</head>
+<body>
+	<h1>Spring MVC - Exemplo 5</h1>
+	<p>Apelido: <span th:text="${apelidoParam}">Fulano da Silva</span></p>
+	<p th:if="${generoParam == 1}">Genero: Masculino</p>
+	<p th:if="${generoParam == 0}">Genero: Feminino</p>
+	<p>Data de nascimento: <span th:text="${dtNascParam}">10/10/1999</span></p>
+</body>
+</html>
