@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulário</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main class="container">
+            <div class="row">
+                <section class="col-md-12">
+                    <div>ID: <span th:text="${dados.id}"></span></div>
+                    <div>Nome: <span th:text="${dados.nome}"></span></div>
+                    <div>Descrição: <span th:text="${dados.descricao}"></span></div>
+                    <div>E-mail: <span th:text="${dados.email}"></span></div>
+                    <div>Senha: <span th:text="${dados.senha}"></span></div>
+                    <div>Número da sorte: <span th:text="${dados.numeroSorte}"></span></div>
+                    <div>Altura: <span th:text="${dados.altura}"></span></div>
+                    <div>Peso: <span th:text="${dados.peso}"></span></div>
+                    <div>Data nascimento: <span th:text="${dados.dtNascimento}"></span></div>
+                    <div>Sexo: <span th:text="${dados.sexo == 1? 'Masculino' : 'Feminino'}"></span></div>
+                    <div>Interesses:
+                        <ul th:if="${dados.interesses != null}" th:each="interesse : ${dados.interesses}">
+                            <li th:text="${interesse}"></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+    </body>
+</html>
