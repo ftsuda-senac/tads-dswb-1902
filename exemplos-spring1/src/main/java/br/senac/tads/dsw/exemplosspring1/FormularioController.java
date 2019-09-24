@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +52,19 @@ public class FormularioController {
 	public ModelAndView salvarDadosPostRedirectGet(
 			@ModelAttribute("dadosPessoais") DadosPessoais dadosPreenchidos,
 			RedirectAttributes redirAttr) {
+		ModelAndView mv = new ModelAndView("redirect:/formulario/resultado");
+		redirAttr.addFlashAttribute("dados", dadosPreenchidos);
+		return mv;
+	}
+	
+	@PostMapping("/salvar-prg-validacao")
+	public ModelAndView salvarDadosComValidacao(
+			@ModelAttribute("dadosPessoais") @Valid DadosPessoais dadosPreenchidos,
+			BindingResult bindingResult,
+			RedirectAttributes redirAttr) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView("formulario-final");
+		}
 		ModelAndView mv = new ModelAndView("redirect:/formulario/resultado");
 		redirAttr.addFlashAttribute("dados", dadosPreenchidos);
 		return mv;
