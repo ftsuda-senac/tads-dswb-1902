@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.dsw.exemplosspring.sessao;
+package br.senac.tads.dsw.exemplosspring1;
 
 import java.util.Arrays;
 import org.springframework.stereotype.Controller;

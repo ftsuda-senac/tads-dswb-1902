@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ExemploController {
 
-	@GetMapping
+	@GetMapping("/ex1")
 	public String exemplo1() {
 		return "exemplo1";
 	}
