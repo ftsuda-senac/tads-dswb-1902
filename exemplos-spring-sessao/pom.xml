@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.senac.tads.dsw</groupId>
 	<artifactId>exemplos-spring-sessao</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>exemplos-spring-sessao</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -27,6 +27,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
