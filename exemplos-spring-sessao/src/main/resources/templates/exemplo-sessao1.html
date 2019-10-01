@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulário</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 th:text="${titulo}">Exemplo sessão - item</h1>
+                </div>
+            </div>
+			<div class="row" th:if="${msg != null}">
+				<div class="col-12 alert alert-success">
+                       <span data-th-text="${msg}">Mensagem sucesso</span>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-4" th:each="item : ${itens}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${item.nome}">Item X</h5>
+                            <p class="card-text">Descrição do item</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID: <span th:text="${item.id}">1</span></li>
+                            <li class="list-group-item">Valor: <span th:text="${item.valor}">99</span></li>
+                        </ul>
+                        <div class="card-body">
+                            <form method="post" th:action="@{/exemplo-sessao1}">
+                                <input type="hidden" name="itemId" th:value="${item.id}" />
+                                <button type="submit" class="btn btn-block" th:style="'color: #fff; background-color: ' + ${item.corHex}">Adicionar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <hr>
+            <div class="row" th:if="${#lists.isEmpty(session.itensSelecionados1)}">
+                <div class="col-12">
+                    <h2>Nenhum item adicionado</h2>
+                </div>
+            </div>
+            <div class="row" th:unless="${#lists.isEmpty(session.itensSelecionados1)}">
+                <div class="col-12">
+                    <table class="table table-striped table-sm table-responsive">
+                        <thead class="thead-dark">
+                            <tr>
+                            	<th>#</th>
+                                <th>Item ID</th>
+                                <th>Nome</th>
+                                <th>Data e hora de inclusão</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="sel,stat : ${session.itensSelecionados1}">
+                            	<td th:text="${stat.count}"></td>
+                                <td th:text="${sel.item.id}"></td>
+                                <td th:text="${sel.item.nome}"></td>
+                                <td th:text="${sel.dataHoraInclusao}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+    </body>
+</html>
