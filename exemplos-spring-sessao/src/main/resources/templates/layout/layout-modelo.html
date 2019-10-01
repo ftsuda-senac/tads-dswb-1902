@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="h-100">
     <head>
-        <title>Tela 3 sem layout</title>
+        <title>MODELO DA TELA</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
@@ -47,7 +47,7 @@
     </head>
     <body class="d-flex flex-column h-100">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">TADS</a>
+            <a class="navbar-brand" href="#">TADS DSW</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -70,35 +70,15 @@
             </div>
         </nav>
 
-        <main role="main" class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Exemplo sem Layout Dialect</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4" th:each="item : ${itens}">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${item.nome}">Item Xt</h5>
-                            <p class="card-text">Descrição do item</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ID: <span th:text="${item.id}">1</span></li>
-                            <li class="list-group-item">Valor: <span th:text="${item.valor}">99</span></li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="btn btn-block" th:style="'color: #fff; background-color: ' + ${item.corHex}">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <main role="main" layout:fragment="conteudo">
+			<h1>ESTE CONTEUDO SERÁ SUBSTITUIDO PELOS CONTEUDOS ESPECIFICOS DE CADA TELA</h1>
         </main>
 
         <footer class="footer mt-auto py-3">
             <div class="container">
-                <span class="text-muted">Place sticky footer content here.</span>
+                <span class="text-muted">&copy; Senac 2019</span>
             </div>
         </footer>
+
     </body>
 </html>

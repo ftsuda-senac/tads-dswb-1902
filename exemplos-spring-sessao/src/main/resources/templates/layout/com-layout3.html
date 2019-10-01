@@ -1,0 +1,35 @@
+<!doctype html>
+<html layout:decorate="~{layout/layout-modelo2}">
+    <head>
+        <title>Tela 3 com layout</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+
+        <main class="container" layout:fragment="conteudo">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Exemplo sem Layout Dialect</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4" th:each="item : ${itens}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${item.nome}">Item Xt</h5>
+                            <p class="card-text">Descrição do item</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID: <span th:text="${item.id}">1</span></li>
+                            <li class="list-group-item">Valor: <span th:text="${item.valor}">99</span></li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="btn btn-block" th:style="'color: #fff; background-color: ' + ${item.corHex}">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </body>
+</html>
