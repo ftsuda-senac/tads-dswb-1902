@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exemplo links</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- EXEMPLOS PARA CARREGAR CSS E JS DISPONIVEIS NO DIRETORIO /resources/static -->
+        <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+        <script th:src="@{/js/funcoes.js}"></script>
+    </head>
+    <body>
+        <h1>Exemplos de como montar links com Thymeleaf</h1>
+        <h2>Para todos os exemplos, comparar o HTML do template Thymelaf com o HTML referente à página apresentada no navegador após o processamento</h2>
+        <div>
+            <p>Para carregar arquivos /css/estilos.css e /js/funcoes.js do diretório /resources/static - usar <code>th:href="@{/css/estilos.css}"</code> e <code>th:src="@{/js/funcoes.js}"</code>.</p>
+        </div>
+        <div>
+            <p>Acesso exemplo 1 - usar atributo <code>th:href="@{/ex1}"</code></p>
+            <a th:href="@{/ex1}">Exemplo /ex1</a>
+        </div>
+        <div>
+            <p>Acesso exemplo 2 - usar atributo <code>th:href="@{/ex2}"</code></p>
+            <a th:href="@{/ex2}">Exemplo /ex2</a> (versão com String) e <a th:href="@{/ex2b}">/ex2b</a> (Versão com ModelAndView)
+        </div>
+        <div>
+            <p>Acesso exemplo 3 - usar atributo <code>th:href="@{/ex3}"</code></p>
+            <a th:href="@{/ex3}">Exemplo /ex3</a>
+        </div>
+        <div>
+            <p>Acesso exemplo 4 com parâmetros via query string - usar atributo <code>th:href="@{/ex4(nome='Fulano da Silva',genero=1,dtnasc='2000-05-20')}"</code></p>
+            <a th:href="@{/ex4(nome='Fulano da Silva',genero=1,dtnasc=2000-05-20)}">Exemplo /ex4?nome=Fulano%20da%20Silva&genero=1&dtnasc=2000-05-20</a>
+        </div>
+        <div>
+            <p>Acesso exemplo 5 com parâmetro na URL - usar atributo <code>th:href="@{/ex5/{apelido}(apelido='ciclana')}"</code></p>
+            <a th:href="@{/ex5/{apelido}(apelido=ciclana,genero=0,dtnasc=2002-08-29)}">Exemplo /ex5/ciclana?genero=0&dtnasc=2002-08-29</a>
+        </div>
+        <div>
+            <p>Exemplos de links gerados com informações dinâmicas</p>
+            <a th:href="@{/links/dinamico}">Exemplo /links/dinamico</a>
+        </div>
+        <div>
+            <p>Acesso Link externo - usar atributo <code>th:href="@{http://www.sp.senac.br}"</code></p>
+            <a th:href="@{http://www.sp.senac.br}">Link externo</a>
+        </div>
+        <p>Mais informações em <a href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls">https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls</a></p>
+        
+        <div>
+            <p>Exemplo imagem - usar atributo <code>th:src="@{/img/senac_logo.png}"</code> para acessar imagem do diretório /resources/static</p>
+            <img th:src="@{/img/senac_logo.png}" style="width: 200px" />
+        </div>
+    </body>
+</html>

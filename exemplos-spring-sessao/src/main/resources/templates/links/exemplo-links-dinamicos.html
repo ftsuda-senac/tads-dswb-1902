@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exemplo links dinâmicos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+    </head>
+    <body>
+        <h1>Exemplo links dinâmicos</h1>
+        <p>Usar atributo <code>th:href="@{/links/dinamico/{id}(id=${item})}"</code></p>
+        <ul th:each="item : ${itens}">
+            <li><a th:href="@{/links/dinamico/{id}(id=${item})}" th:text="${'Abrir item ' + item}"></a></li>
+        </ul>
+        <p><a th:href="@{/links}">Voltar</a></p>
+    </body>
+</html>
