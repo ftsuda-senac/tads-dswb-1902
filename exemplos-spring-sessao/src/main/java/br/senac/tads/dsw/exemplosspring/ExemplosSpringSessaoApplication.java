@@ -1,4 +1,4 @@
-package br.senac.tads.dsw.exemplosspring.sessao;
+package br.senac.tads.dsw.exemplosspring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
