@@ -1,0 +1,125 @@
+<html layout:decorate="~{modelo}">
+<head>
+    <meta charset="UTF-8" />
+    <title>TADS DSW</title>
+</head>
+<body>
+    <main class="container" layout:fragment="conteudo">
+        <div class="row">
+            <section class="col-md-12">
+                <h1 th:if="${produto.id == null}">Inclusão de produto</h1>
+                <h1 th:if="${produto.id != null}">Alteração de produto</h1>
+                <form th:action="@{/produto/salvar}" method="post" th:object="${produto}" novalidate>
+                    <input type="hidden" th:if="*{id != null}" th:field="*{id}" />
+
+                    <div class="form-group row">
+                        <label for="txtNome" class="col-sm-2 col-form-label">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="nome" class="form-control" th:classappend="${#fields.hasErrors('nome')}? is-invalid" id="txtNome" placeholder="Nome" th:field="*{nome}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+                                Digite um nome.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtDescricao" class="col-sm-2 col-form-label">Descrição</label>
+                        <div class="col-sm-10">
+                            <textarea name="descricao" class="form-control" id="txtDescricao" placeholder="Descrição" th:field="*{descricao}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtPrecoCompra" class="col-sm-2 col-form-label">Preço compra</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" 
+                                   th:classappend="${#fields.hasErrors('precoCompra')}? is-invalid" 
+                                   id="txtPrecoCompra" placeholder="Preço de compra" th:field="*{precoCompra}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('precoCompra')}" th:errors="*{precoCompra}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtPrecoVenda" class="col-sm-2 col-form-label">Preço venda</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" 
+                                   th:classappend="${#fields.hasErrors('precoVenda')}? is-invalid" 
+                                   id="txtPrecoVenda" placeholder="Preço de venda" th:field="*{precoVenda}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('precoVenda')}" th:errors="*{precoVenda}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txtQuantidade" class="col-sm-2 col-form-label">Quantidade</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" 
+                                   th:classappend="${#fields.hasErrors('quantidade')}? is-invalid" 
+                                   id="txtQuantidade" placeholder="Quantidade" th:field="*{quantidade}">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Disponível</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="disponivel" id="optDisponivelSim" value="true" th:field="*{disponivel}">
+                                    <label class="form-check-label" for="optDisponivelSim">
+                                        Sim
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="disponivel" id="optDisponivelNao" value="false" th:field="*{disponivel}">
+                                    <label class="form-check-label" for="optDisponivelNao">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Categorias</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check form-check-inline" th:if="${categorias != null}"
+                                     th:each="cat : ${categorias}">
+                                    <input class="form-check-input" th:classappend="${#fields.hasErrors('categorias')}? is-invalid" type="checkbox" name="idsCategorias" th:value="${cat.id}" th:field="*{idsCategorias}">
+                                    <label class="form-check-label" th:text="${cat.nome}" th:for="${#ids.prev('idsCategorias')}">
+                                    </label>
+                                </div>
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset class="form-group">
+                        <div class="row">
+                        	<div class="col-4" th:each="imagem, stat : ${produto.imagensList}">
+                        		<input type="hidden" th:field="*{imagensList[__${stat.index}__].id}" />
+                        		<input type="hidden" th:field="*{imagensList[__${stat.index}__].nomeArquivo}" />
+                        		<input type="hidden" th:field="*{imagensList[__${stat.index}__].legenda}" />
+                        		<div class="card">
+                        			<img th:src="${imagem.urlImagem}" th:alt-title="${imagem.legenda}" class="card-img-top" />
+  									<div class="card-body">
+  										<p class="card-text" th:text="${imagem.legenda}"></p>
+ 									</div>
+ 								</div>
+                        	</div>
+                       	</div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-md-3 offset-md-3">
+                            <a th:href="@{/produto}" role="button" class="btn btn-block btn-outline-dark">Cancelar</a>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-block btn-success">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
