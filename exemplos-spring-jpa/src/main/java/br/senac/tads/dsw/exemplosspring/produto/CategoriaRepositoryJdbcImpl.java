@@ -39,7 +39,8 @@ public class CategoriaRepositoryJdbcImpl implements CategoriaRepository {
 	@Override
 	public Categoria findById(Integer id) {
 		String sql = "SELECT NOME FROM CATEGORIA WHERE ID=?";
-		try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+		try (Connection conn = dataSource.getConnection(); 
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery()) {
 

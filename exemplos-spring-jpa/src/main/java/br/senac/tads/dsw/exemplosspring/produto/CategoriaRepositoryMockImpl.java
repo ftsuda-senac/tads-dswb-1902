@@ -5,13 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.stereotype.Service;
-
 /**
  *
  * @author fernando.tsuda
  */
-@Service
 public class CategoriaRepositoryMockImpl implements CategoriaRepository {
 
 	private Map<Integer, Categoria> mapItens;
