@@ -16,6 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
@@ -25,6 +30,22 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
+	@NamedQuery(name = "Produto.findByCategoriaId", 
+		query ="SELECT p FROM Produto p INNER JOIN p.categorias c WHERE c.id IN :idCat"),
+	@NamedQuery(name = "Produto.findById", 
+		query = "SELECT p FROM Produto p WHERE p.id = :idProd")
+//	@NamedQuery(name = "Produto.findById", 
+//		query = "SELECT p FROM Produto p LEFT JOIN FETCH p.categorias "
+//				+ "LEFT JOIN FETCH p.imagens WHERE p.id = :idProd") // FETCH USADO NA QUERY QUANDO open-in-view=false
+})
+@NamedEntityGraphs({
+	@NamedEntityGraph(name = "graph.ProdutoCategoria", 
+			attributeNodes = @NamedAttributeNode(value = "categorias")),
+	@NamedEntityGraph(name = "graph.ProdutoImagens", 
+		attributeNodes = @NamedAttributeNode(value = "imagens")),
+})
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;

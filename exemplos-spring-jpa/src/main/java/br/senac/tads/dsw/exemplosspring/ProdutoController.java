@@ -91,6 +91,7 @@ public class ProdutoController {
     public ModelAndView salvar(
             @ModelAttribute @Valid Produto produto, 
             BindingResult bindingResult, RedirectAttributes redirAttr) {
+    	
         produto.setDtCadastro(LocalDateTime.now());
         if (produto.getIdsCategorias() != null && !produto.getIdsCategorias().isEmpty()) {
             Set<Categoria> categoriasSelecionadas = new HashSet<>();
