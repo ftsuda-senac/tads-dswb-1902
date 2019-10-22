@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -55,10 +56,10 @@ public class ProdutoController {
         List<Produto> resultados;
         if (idsCat != null && !idsCat.isEmpty()) {
             // Busca pelos IDs das categorias informadas
-            resultados = produtoRepository.findByCategoria(idsCat, offset, qtd);
+            resultados = produtoRepository.findByCategorias_IdIn(idsCat);
         } else {
             // Lista todos os produtos usando paginacao
-            resultados = produtoRepository.findAll(offset, qtd);
+            resultados = produtoRepository.findAll();
         }
         return new ModelAndView("produto/lista").addObject("produtos", resultados);
     }
@@ -72,7 +73,9 @@ public class ProdutoController {
     @GetMapping("/{id}/editar")
     public ModelAndView editar(@PathVariable("id") long id) {
 
-    	Produto prod = produtoRepository.findById(id);
+    	Optional<Produto> optProd = produtoRepository.findById(id);
+    	Produto prod = optProd.get();
+    	
         if (prod.getCategorias() != null && !prod.getCategorias().isEmpty()) {
             Set<Integer> idsCategorias = new HashSet<>();
             for (Categoria cat : prod.getCategorias()) {
@@ -95,7 +98,8 @@ public class ProdutoController {
         if (produto.getIdsCategorias() != null && !produto.getIdsCategorias().isEmpty()) {
             Set<Categoria> categoriasSelecionadas = new HashSet<>();
 			for (Integer idCat : produto.getIdsCategorias()) {
-				Categoria cat = categoriaRepository.findById(idCat);
+				Optional<Categoria> optCat = categoriaRepository.findById(idCat);
+				Categoria cat = optCat.get();
 				categoriasSelecionadas.add(cat);
 				cat.setProdutos(new HashSet<>(Arrays.asList(produto)));
 			}

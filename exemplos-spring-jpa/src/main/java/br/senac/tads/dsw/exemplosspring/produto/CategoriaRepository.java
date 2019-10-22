@@ -1,13 +1,10 @@
 package br.senac.tads.dsw.exemplosspring.produto;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CategoriaRepository {
+@Repository
+public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
-	List<Categoria> findAll();
-
-	Categoria findById(Integer id);
-
-	Categoria save(Categoria cat);
 
 }

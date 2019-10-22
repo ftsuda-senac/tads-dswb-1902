@@ -6,6 +6,7 @@
 package br.senac.tads.dsw.exemplosspring;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -36,6 +37,7 @@ public class CategoriaController {
 
     @GetMapping
     public ModelAndView listar() {
+    	
         List<Categoria> resultados = repository.findAll();
         return new ModelAndView("categoria/lista")
                 .addObject("categorias", resultados);
@@ -49,7 +51,8 @@ public class CategoriaController {
     
 	@GetMapping("/{id}/editar")
 	public ModelAndView editar(@PathVariable("id") int id) {
-		Categoria cat = repository.findById(id);
+		Optional<Categoria> optCat = repository.findById(id);
+		Categoria cat = optCat.get();
 		return new ModelAndView("categoria/form").addObject("categoria", cat);
 	}
 

@@ -6,43 +6,72 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotBlank
 	@Size(min = 1, max = 100)
+	@Column
 	private String nome;
 
 	@Size(max = 1000)
+	@Column
 	private String descricao;
 
 	@NotNull
 	@Digits(integer = 9, fraction =  2)
+	@Column
 	private BigDecimal precoCompra;
 
 	@NotNull
 	@Digits(integer = 9, fraction =  2)
+	@Column
 	private BigDecimal precoVenda;
 
 	@NotNull
 	@Min(0)
+	@Column
 	private int quantidade;
 
+	@Column
 	private boolean disponivel;
 
+	@Column(nullable = false)
 	private LocalDateTime dtCadastro;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "produto_categoria",
+			joinColumns = @JoinColumn(name = "id_produto"),
+			inverseJoinColumns = @JoinColumn(name = "id_categoria"))
 	private Set<Categoria> categorias;
 
+	@OneToMany(mappedBy = "produto", fetch = FetchType.LAZY, 
+			cascade = { CascadeType.PERSIST, CascadeType.MERGE }, 
+			orphanRemoval = true)
 	private Set<ImagemProduto> imagens;
 
 	private transient Set<Integer> idsCategorias;
@@ -51,6 +80,7 @@ public class Produto implements Serializable {
 	// https://stackoverflow.com/a/28505620
 	private transient List<ImagemProduto> imagensList;
 
+	@Transient
 	private String observacoes;
 
 	public Produto() {
