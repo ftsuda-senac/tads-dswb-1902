@@ -1,8 +1,6 @@
 package br.senac.tads.dsw.exemplosspring.produto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -43,13 +41,11 @@ public class ProdutoRepositoryJpaImpl implements ProdutoRepository {
 
 	@Override
 	public Produto findById(Long id) {
-		EntityGraph<?> graph = em.getEntityGraph("graph.ProdutoCategoria");
-		EntityGraph<?> graphImagens = em.getEntityGraph("graph.ProdutoImagens");
+		EntityGraph<?> graph = em.getEntityGraph("graph.ProdutoCategoriasImagens");
 		 
 		Query jpqlQuery = em.createNamedQuery("Produto.findById")
 				.setParameter("idProd", id)
-				.setHint("javax.persistence.loadgraph", graph)
-				.setHint("javax.persistence.loadgraph", graphImagens);
+				.setHint("javax.persistence.loadgraph", graph);
 		return (Produto) jpqlQuery.getSingleResult();
 	}
 

@@ -40,11 +40,13 @@ import javax.validation.constraints.Size;
 //		query = "SELECT p FROM Produto p LEFT JOIN FETCH p.categorias "
 //				+ "LEFT JOIN FETCH p.imagens WHERE p.id = :idProd") // FETCH USADO NA QUERY QUANDO open-in-view=false
 })
+// Referência namedEntityGraphs: https://thoughts-on-java.org/jpa-21-entity-graph-part-1-named-entity/
 @NamedEntityGraphs({
-	@NamedEntityGraph(name = "graph.ProdutoCategoria", 
-			attributeNodes = @NamedAttributeNode(value = "categorias")),
-	@NamedEntityGraph(name = "graph.ProdutoImagens", 
-		attributeNodes = @NamedAttributeNode(value = "imagens")),
+	@NamedEntityGraph(name = "graph.ProdutoCategoriasImagens", 
+			attributeNodes = { 
+					@NamedAttributeNode(value = "categorias"), 
+					@NamedAttributeNode(value = "imagens")
+			})
 })
 public class Produto implements Serializable {
 
