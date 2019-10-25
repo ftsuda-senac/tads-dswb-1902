@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Home</h1>
+        <div th:if="${usuario != null}">
+            <div>
+                <h2>Nome completo: <span th:text="${usuario.nomeCompleto}"></span></h2>
+                <p th:text="${usuario.hashSenha}"></p>
+                <p><a th:href="@{/logout}">Sair</a></p>
+            </div>
+        </div>
+        <div th:unless="${usuario != null}">
+            <h1>Usuário não logado no sistema
+        </div>
+    </body>
+</html>
