@@ -11,7 +11,9 @@
         
         <div>
             <h2>Informações do usuário</h2>
-            <p>Nome completo: <span></span></p>
+            <p>Nome completo: <span sec:authentication="principal.nomeCompleto"></span></p>
+            <p sec:authentication="principal.hashSenha"></p>
+            <a th:href="@{/home}">Voltar</a>
         </div>
     </body>
 </html>

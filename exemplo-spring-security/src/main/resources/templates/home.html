@@ -11,8 +11,10 @@
             <div>
                 <h2>Nome completo: <span th:text="${usuario.nomeCompleto}"></span></h2>
                 <p th:text="${usuario.hashSenha}"></p>
-                <ul th:each="papel : ${usuario.papeis}">
-                	<li th:text="${papel.nome}"></li>
+                <ul>
+                	<li sec:authorize="hasRole('ROLE_PEAO')"><a th:href="@{/protegido/peao}">Tela PEAO</a></li>
+                	<li sec:authorize="hasRole('ROLE_FODON')"><a th:href="@{/protegido/fodon}">Tela FODON</a></li>
+                	<li sec:authorize="hasRole('ROLE_GOD')"><a th:href="@{/protegido/god}">Tela GOD</a></li>
                 </ul>
                 <p><a th:href="@{/logout}">Sair</a></p>
             </div>
