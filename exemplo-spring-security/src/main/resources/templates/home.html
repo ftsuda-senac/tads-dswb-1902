@@ -11,6 +11,9 @@
             <div>
                 <h2>Nome completo: <span th:text="${usuario.nomeCompleto}"></span></h2>
                 <p th:text="${usuario.hashSenha}"></p>
+                <ul th:each="papel : ${usuario.papeis}">
+                	<li th:text="${papel.nome}"></li>
+                </ul>
                 <p><a th:href="@{/logout}">Sair</a></p>
             </div>
         </div>
