@@ -41,15 +41,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return plainPasswordEncoder();
+        return bcryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) 
     		throws Exception {
-    	http.csrf().disable().authorizeRequests()
-    		.antMatchers("/**").authenticated()
-    		.and().formLogin();
+    	http.csrf().disable()
+		.authorizeRequests()
+        .antMatchers("/css/**", "/img/**", "/js/**", "/font/**")
+        .permitAll()
+        .antMatchers("/protegido/peao").hasRole("PEAO")
+        .antMatchers("/protegido/fodon").hasRole("FODON")
+        .antMatchers("/protegido/god").hasRole("GOD")
+        .antMatchers("/**").authenticated()
+		.and()
+        .formLogin()
+        .loginPage("/login") // DEFINE A TELA DE LOGIN DO SISTEMA E NAO DO SPRING
+        .usernameParameter("username")
+        .passwordParameter("senha")
+        .defaultSuccessUrl("/home").permitAll()
+        .and()
+        .logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login?logout")
+        .invalidateHttpSession(true).deleteCookies("JSESSIONID")
+        .and()
+        .exceptionHandling().accessDeniedPage("/erro/403");
 
     }
 
