@@ -1,5 +1,6 @@
 package br.senac.tads.dsw.exemplosspring.produto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -31,6 +32,7 @@ public class Categoria implements Serializable {
     @Column(unique = true)
     private String nome;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
     private Set<Produto> produtos;
 

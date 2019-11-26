@@ -1,5 +1,6 @@
 package br.senac.tads.dsw.exemplosspring.produto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -35,6 +36,7 @@ public class ImagemProduto implements Serializable {
 	@Column
 	private String legenda;
 
+        @JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
